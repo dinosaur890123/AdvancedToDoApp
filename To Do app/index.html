@@ -4,98 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Todo App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        .task-completed {
-            opacity: 0.6;
-            text-decoration: line-through;
-        }
-        .priority-high {
-            border-left: 4px solid #ef4444;
-        }
-        .priority-medium {
-            border-left: 4px solid #f59e0b;
-        }
-        .priority-low {
-            border-left: 4px solid #10b981;
-        }
-    </style>
+    <link rel="stylesheet" href="modern-minimal.css">
 </head>
 <body class="bg-gray-50 dark:bg-gray-900">
-    <div id="app" class="flex h-screen">
-        <!-- Sidebar -->
-        <div id="sidebar" class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 hidden lg:block">
-            <div class="p-4">
-                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
-                    Categories
-                </h3>
-                <div id="categories" class="space-y-2">
-                    <!-- Categories will be populated here -->
-                </div>
+    <div class="app-shell">
+        <header>
+            <h1>Todo</h1>
+            <div class="header-actions">
+                <button id="pomodoro-btn" class="btn" title="Pomodoro">🍅</button>
+                <button id="templates-btn" class="btn" title="Templates">📄</button>
+                <button id="settings-btn" class="btn" title="Settings">⚙️</button>
+                <button id="theme-toggle" class="btn" title="Theme">🌓</button>
+                <button id="add-task" class="add-task-btn">＋ Add</button>
             </div>
+        </header>
+        <div class="stats-bar" id="stats">
+            <!-- Stats will be populated here -->
         </div>
-
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Header -->
-            <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <button id="toggle-sidebar" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden">
-                            <i data-lucide="menu" class="h-5 w-5"></i>
-                        </button>
-                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-                            Advanced Todo
-                        </h1>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">
-                            <i data-lucide="sun" class="h-5 w-5"></i>
-                        </button>
-                        <button id="add-task" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors">
-                            <i data-lucide="plus" class="h-4 w-4 mr-2"></i>
-                            Add Task
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Stats -->
-            <div id="stats" class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
-                <!-- Stats will be populated here -->
-            </div>
-
-            <!-- Filter Bar -->
-            <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
-                <div class="flex flex-wrap items-center gap-4">
-                    <input 
-                        type="text" 
-                        id="search" 
-                        placeholder="Search tasks..." 
-                        class="flex-1 min-w-0 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    >
-                    <select id="filter-status" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                        <option value="all">All Tasks</option>
-                        <option value="active">Active</option>
-                        <option value="completed">Completed</option>
-                        <option value="overdue">Overdue</option>
-                    </select>
-                    <select id="filter-priority" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                        <option value="">All Priorities</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Task List -->
-            <div class="flex-1 overflow-auto p-4">
-                <div id="task-list" class="space-y-3">
-                    <!-- Tasks will be populated here -->
-                </div>
-            </div>
+        <div class="filter-bar">
+            <input type="text" id="search" placeholder="Search...">
+            <select id="filter-status">
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="overdue">Overdue</option>
+            </select>
+            <select id="filter-priority">
+                <option value="">Priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+        <div class="task-list" id="task-list">
+            <!-- Tasks will be populated here -->
         </div>
     </div>
 
@@ -141,6 +83,14 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tags</label>
                     <input type="text" id="task-tags" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="Enter tags separated by commas...">
                 </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Estimated Time (minutes)</label>
+                    <input type="number" id="task-estimate" min="5" step="5" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="25">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Notes</label>
+                    <textarea id="task-notes" rows="2" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="Additional notes..."></textarea>
+                </div>
                 <div class="flex justify-end space-x-3 pt-4">
                     <button type="button" id="cancel-task" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">Cancel</button>
                     <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors">Create Task</button>
@@ -149,6 +99,118 @@
         </div>
     </div>
 
-    <script src="todo-app.js"></script>
+    <!-- Task Templates Modal -->
+    <div id="templates-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Task Templates</h2>
+                <button id="close-templates-modal" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="mb-4">
+                    <button id="add-template-btn" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors">
+                        <i data-lucide="plus" class="h-4 w-4 mr-2"></i>
+                        Create Template
+                    </button>
+                </div>
+                <div id="templates-list" class="space-y-3">
+                    <!-- Templates will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pomodoro Timer Modal -->
+    <div id="pomodoro-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Pomodoro Timer</h2>
+                <button id="close-pomodoro-modal" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="text-center">
+                    <div class="pomodoro-timer rounded-full w-48 h-48 mx-auto mb-6 flex items-center justify-center shadow-lg">
+                        <div class="text-center">
+                            <div id="timer-display" class="text-4xl font-mono font-bold text-gray-900 dark:text-white">25:00</div>
+                            <div id="timer-session" class="text-sm text-gray-600 dark:text-gray-400 mt-1">Work Session</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center space-x-4 mb-6">
+                        <button id="timer-start" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md font-medium transition-colors">
+                            <i data-lucide="play" class="h-4 w-4 mr-2 inline"></i>Start
+                        </button>
+                        <button id="timer-pause" class="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-md font-medium transition-colors hidden">
+                            <i data-lucide="pause" class="h-4 w-4 mr-2 inline"></i>Pause
+                        </button>
+                        <button id="timer-reset" class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md font-medium transition-colors">
+                            <i data-lucide="rotate-ccw" class="h-4 w-4 mr-2 inline"></i>Reset
+                        </button>
+                    </div>
+                    <div id="current-task-display" class="text-sm text-gray-600 dark:text-gray-400">
+                        No task selected
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Settings</h2>
+                <button id="close-settings-modal" class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Preferences</h3>
+                    <div class="space-y-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="setting-sound" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Enable sound effects</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="setting-notifications" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Enable notifications</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="setting-animations" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500" checked>
+                            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Enable animations</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Data Management</h3>
+                    <div class="space-y-3">
+                        <button id="export-data" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors">
+                            <i data-lucide="download" class="h-4 w-4 mr-2 inline"></i>Export Data
+                        </button>
+                        <button id="import-data" class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md font-medium transition-colors">
+                            <i data-lucide="upload" class="h-4 w-4 mr-2 inline"></i>Import Data
+                        </button>
+                        <button id="clear-data" class="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md font-medium transition-colors">
+                            <i data-lucide="trash-2" class="h-4 w-4 mr-2 inline"></i>Clear All Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="import-file-input" accept=".json" class="hidden">
+
+    <!-- Celebration Modal -->
+    <div id="celebration-modal" class="fixed inset-0 flex items-center justify-center pointer-events-none z-50 hidden">
+        <div class="text-6xl celebration-animation">🎉</div>
+    </div>
+
+    <script src="todo-app-enhanced.js"></script>
 </body>
 </html>
