@@ -1,0 +1,90 @@
+/* Material Design 3 (M3) CSS Theme */
+:root {
+  --m3-primary: #6750a4;
+  --m3-on-primary: #fff;
+  --m3-surface: #f5f5f5;
+  --m3-surface-container: #fff;
+  --m3-outline: #cac4d0;
+  --m3-radius: 16px;
+  --m3-shadow: 0 2px 8px 0 rgba(103,80,164,0.08);
+  --m3-header-gradient: linear-gradient(90deg, #ede7f6 0%, #f5f5f5 100%);
+}
+body[data-theme='material3'] {
+  background: var(--m3-surface);
+  color: #1c1b1f;
+}
+body[data-theme='material3'] .app-shell {
+  background: var(--m3-surface-container);
+  border-radius: 0;
+  box-shadow: none;
+}
+body[data-theme='material3'] header {
+  background: var(--m3-header-gradient);
+  border-bottom: 1px solid var(--m3-outline);
+}
+body[data-theme='material3'] h1 {
+  color: var(--m3-primary);
+}
+body[data-theme='material3'] .header-actions .btn {
+  background: none;
+  color: var(--m3-primary);
+  border-radius: var(--m3-radius);
+  font-weight: 600;
+}
+body[data-theme='material3'] .header-actions .btn:hover {
+  background: #ede7f6;
+}
+body[data-theme='material3'] .add-task-btn {
+  background: var(--m3-primary);
+  color: var(--m3-on-primary);
+  border-radius: var(--m3-radius);
+  font-weight: 700;
+  box-shadow: var(--m3-shadow);
+}
+body[data-theme='material3'] .add-task-btn:hover {
+  background: #4f378b;
+}
+body[data-theme='material3'] .stats-bar,
+body[data-theme='material3'] .filter-bar {
+  background: var(--m3-surface);
+  border-bottom: 1px solid var(--m3-outline);
+}
+body[data-theme='material3'] input,
+body[data-theme='material3'] select,
+body[data-theme='material3'] textarea {
+  background: #f3f1f8;
+  border: 1.5px solid var(--m3-outline);
+  border-radius: var(--m3-radius);
+  color: #1c1b1f;
+}
+body[data-theme='material3'] input:focus,
+body[data-theme='material3'] select:focus,
+body[data-theme='material3'] textarea:focus {
+  border: 2px solid var(--m3-primary);
+}
+body[data-theme='material3'] .task-list {
+  background: var(--m3-surface);
+}
+body[data-theme='material3'] .task-card {
+  background: var(--m3-surface-container);
+  border-radius: var(--m3-radius);
+  box-shadow: var(--m3-shadow);
+  border: 1px solid var(--m3-outline);
+}
+body[data-theme='material3'] .task-card:hover {
+  background: #f3f1f8;
+}
+body[data-theme='material3'] .task-title {
+  color: #1c1b1f;
+}
+body[data-theme='material3'] .task-meta {
+  color: #5c5470;
+}
+body[data-theme='material3'] .modal {
+  background: var(--m3-surface-container);
+  border-radius: var(--m3-radius);
+  box-shadow: var(--m3-shadow);
+}
+body[data-theme='material3'] .modal-title {
+  color: var(--m3-primary);
+}

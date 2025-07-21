@@ -1159,7 +1159,31 @@ class TodoApp {
 // Global variable to access app instance
 let todoApp;
 
+// Theme switching logic
+function applyThemeSetting(theme) {
+    if (theme === 'material3') {
+        document.body.setAttribute('data-theme', 'material3');
+    } else {
+        document.body.removeAttribute('data-theme');
+    }
+}
+
 // Initialize the app when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     todoApp = new TodoApp();
+    // Theme select in settings
+    const themeSelect = document.getElementById('setting-theme');
+    if (themeSelect) {
+        // Load saved theme
+        const savedTheme = localStorage.getItem('todo-app-theme-style') || 'modern';
+        themeSelect.value = savedTheme;
+        applyThemeSetting(savedTheme);
+        themeSelect.addEventListener('change', (e) => {
+            const theme = e.target.value;
+            localStorage.setItem('todo-app-theme-style', theme);
+            applyThemeSetting(theme);
+        });
+    } else {
+        applyThemeSetting('modern');
+    }
 });
