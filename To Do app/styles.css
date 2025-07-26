@@ -59,13 +59,13 @@ body {
   min-height: 100vh;
   line-height: 1.5;
   font-feature-settings: "kern" 1;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;                
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* App Shell - Main Container */
-.app-shell {
+.app-shell {     
   width: 100vw;
   min-height: 100vh;
   background: var(--bg-surface);
